@@ -53,7 +53,7 @@
 
 La función de Lyapunov es una herramienta matemática utilizada en el análisis de la estabilidad de sistemas dinámicos, especialmente en sistemas no lineales. Permite determinar si un punto de equilibrio de un sistema es estable, asintóticamente estable o inestable sin necesidad de resolver explícitamente las ecuaciones diferenciales del sistema.
 
-De la teoría clásica de la Mecánica, es sabido que un sistema es estable si su energía, una función positiva, es continuamente decreciente hasta alcanzar el estado de equilibrio \cite{ogata1990modern}. El segundo método de Lyapunov es una generalización de este hecho. Lyapunov demostró que ciertas otras funciones aparte de la función energía pueden ser usadas para la determinacioón de la estabilidad del punto de equilibrio de un sistema.
+De la teoría clásica de la Mecánica, es sabido que un sistema es estable si su energía, una función positiva, es continuamente decreciente hasta alcanzar el estado de equilibrio \cite{ni_pid}. El segundo método de Lyapunov es una generalización de este hecho. Lyapunov demostró que ciertas otras funciones aparte de la función energía pueden ser usadas para la determinacioón de la estabilidad del punto de equilibrio de un sistema.
 
 Los sistemas no lineales son más complejos y pueden mostrar comportamientos que los lineales no tienen. Por ejemplo, mientras un sistema lineal solo tiene un punto de equilibrio (un estado en el que el sistema se mantiene si no hay perturbaciones), un sistema no lineal puede tener varios. Además, en los sistemas lineales, si el punto de equilibrio es estable, el sistema siempre convergerá a él sin importar cómo empiece. En cambio, en los sistemas no lineales, hacia cuál equilibrio converge el sistema depende de su estado inicial. La estabilidad es una de las propiedades más importantes en los sistemas dinámicos, pero analizarla puede ser más o menos complicada dependiendo del tipo de sistema.
 
@@ -272,11 +272,11 @@ El término \( \frac{1}{2}x^T P x \) es definido positivo porque \( P \) es defi
 
 Por lo tanto \( V(x) \)  es definida positiva.
 
-\textbf{Bibliografía}
+\renewcommand{\refname}{Bibliografía}
 \begin{thebibliography}{9}
-    \bibitem{ogata1990modern} K. Ogata, \emph{Modern Control Engineering}. Prentice Hall, 1990.
-    \bibitem{ni_pid} Explicaci\'on sobre el controlador PID y la teor\'ia. NI, 2006. Disponible en: \url{https://www.ni.com/es/shop/labview/pid-theory-explained.html}
-    \bibitem{wu2018adaptive} Q. Wu, \emph{Adaptive Sliding Mode Neural Network Control for Nonlinear Systems}. Elsevier, 2018. Disponible en: \url{https://www.sciencedirect.com/book/9780128153727/adaptive-sliding-mode-neural-network-control-for-nonlinear-systems}
+    \bibitem{ni_pid} Explicación sobre el controlador PID y la teoría. (2006, 31 agosto). NI. \url{https://www.ni.com/es/shop/labview/pid-theory-explained.html?srsltid=AfmBOopNWZ7LXbJ4xDZgMyW8cHP0V1P66Bbn7M0xQEZRS53j4ht9qruX}
+    \bibitem{wu2018adaptive} Wu, Q. (2018). \emph{Adaptive Sliding Mode Neural Network Control for Nonlinear Systems} (Y. Li, J. Zhang, \& W. Qiong, Eds.). Elsevier Science. \url{https://www.sciencedirect.com/book/9780128153727/adaptive-sliding-mode-neural-network-control-for-nonlinear-systems}
+    \bibitem{unr_ingenieria} UNR Ingeniería. (s. f.). Análisis de la estabilidad interna de los sistemas no lineales. \url{https://www.fceia.unr.edu.ar/dsf/files/A_EstSNL.PDF}
 \end{thebibliography}
 
 \end{document}
