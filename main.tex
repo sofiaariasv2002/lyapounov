@@ -230,6 +230,48 @@ La derivada de la función \( \dot{V}(x) = a(1 - \cos(x_1)) + \frac{1}{2}x_2^2 \
     & \hspace{2cm} \dot{V}(x) = a x_2 \sin(x_1) - a x_2 \sin(x_1) - b x_2^2
 \end{flalign*}
 
+\( \dot{V}(x) = -b x_2^2 \) función definida semi-negativa porque \( b \) es una función con 2 variables.
+
+Esta función en el eje \( x_2 = 0 \) hace que la derivada de la función sea 0, por lo que \( \dot{V}(x) \) no es estrictamente menor a 0. Se puede concluir estabilidad pero no estabilidad asintótica en el origen.
+
+Esto no quiere decir que el sistema no sea asintóticamente estable, simplemente no se puede probar esa estabilidad asintótica con esta función. Por lo tanto, tenemos que buscar otra ecuación de Lyapunov que nos dé más información sobre cómo se comporta nuestro sistema.
+
+\includegraphics[width=0.6\textwidth]{grafica.jpeg}
+
+La gráfica nos dice que el sistema es estable pero no disipativo, lo que significa que las trayectorias no divergen, pero tampoco convergen exactamente al equilibrio.  
+
+La gráfica confirma que \( V(x) \) es una función de Lyapunov que garantiza estabilidad en \((0,0)\), pero no estabilidad asintótica.  
+
+Las oscilaciones en \( x_1 \) sugieren que el sistema puede mantener movimientos periódicos sin disipar energía.
+
+\uline{Propuesta para la función de lyapunov 2}
+
+Añadir término cuadrático ponderado con la matriz \( P \), donde \( P \) tiene que ser una matriz definida positiva.
+
+\vspace{-9mm}
+
+\begin{flalign*}
+    & \hspace{4cm} V(x) = a(1 - \cos x_1) + \frac{1}{2}x^T P x
+\end{flalign*}
+
+\( a > 0 \) es una constante positiva.
+
+\( P = P^T > 0 \) definida positiva.
+
+\vspace{-9mm}
+
+\begin{flalign*}
+    & \hspace{6cm} x = [x_1, x_2]^T
+\end{flalign*}
+
+Verificar que \( V(x) \) sea definida positiva.
+
+\((1 - \cos x_1)\) es siempre no negativa, ya que \( \cos(x_1) \leq 1 \). Además, \( 1 - \cos(x_1) = 0 \) sólo cuando \( x_1 = 0 \).
+
+El término \( \frac{1}{2}x^T P x \) es definido positivo porque \( P \) es definida positiva.
+
+Por lo tanto \( V(x) \)  es definida positiva.
+
 \textbf{Bibliografía}
 \begin{thebibliography}{9}
     \bibitem{ogata1990modern} K. Ogata, \emph{Modern Control Engineering}. Prentice Hall, 1990.
