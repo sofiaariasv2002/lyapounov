@@ -244,7 +244,7 @@ La gráfica confirma que \( V(x) \) es una función de Lyapunov que garantiza es
 
 Las oscilaciones en \( x_1 \) sugieren que el sistema puede mantener movimientos periódicos sin disipar energía.
 
-\uline{Propuesta para la función de lyapunov 2}
+\uline{Propuesta para una segunda función de Lyapunov}
 
 Añadir término cuadrático ponderado con la matriz \( P \), donde \( P \) tiene que ser una matriz definida positiva.
 
@@ -254,23 +254,72 @@ Añadir término cuadrático ponderado con la matriz \( P \), donde \( P \) tien
     & \hspace{4cm} V(x) = a(1 - \cos x_1) + \frac{1}{2}x^T P x
 \end{flalign*}
 
-\( a > 0 \) es una constante positiva.
-
-\( P = P^T > 0 \) definida positiva.
+Donde \( x = [x_1, x_2]^\top \). Para incluir el error \( e \), podemos reescribir la función de Lyapunov como:
 
 \vspace{-9mm}
 
 \begin{flalign*}
-    & \hspace{6cm} x = [x_1, x_2]^T
+    & \hspace{3cm} V(e, x_1, x_2) = a(1 - \cos(x_1)) + \frac{1}{2}e^2 + \frac{1}{2}x_2^2
 \end{flalign*}
 
-Verificar que \( V(x) \) sea definida positiva.
+\vspace{-2mm}
 
-\((1 - \cos x_1)\) es siempre no negativa, ya que \( \cos(x_1) \leq 1 \). Además, \( 1 - \cos(x_1) = 0 \) sólo cuando \( x_1 = 0 \).
+Donde:
 
-El término \( \frac{1}{2}x^T P x \) es definido positivo porque \( P \) es definida positiva.
+\begin{itemize}
+    \item \( a > 0 \) es una constante positiva.
+    \item \( P = P^T > 0 \) es una matriz definida positiva.
+    \item \( x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \) es el vector de estado.
+\end{itemize}
 
-Por lo tanto \( V(x) \)  es definida positiva.
+\textbf{Verificación de que \( V(x) \) es definida positiva}
+
+\begin{itemize}
+    \item \( ( 1 - \cos ( x_1 ) ) \) es siempre no negativo, ya que \( \cos (x_1) \leq 1 \). Además, \( 1 - \cos (x_1) = 0 \) solo cuando \( x_1 = 0 \).
+    \item El término \( \frac{1}{2} x^T P x \) es definido positivo porque \( P \) es definida positiva.
+\end{itemize}
+
+Por lo tanto, \( V(x) \) es una función definida positiva y puede ser utilizada para el análisis de estabilidad.
+
+\textbf{Derivada de la función de Lyapunov}
+
+La derivada de la función de Lyapunov \( V(e, x_1, x_2) \) con respecto al tiempo es:
+\vspace{-7mm}
+
+\[
+\dot{V}(e, x_1, x_2) = \frac{d}{dt} \left[ a(1 - \cos(x_1)) + \frac{1}{2} e^2 + \frac{1}{2} x_2^2 \right]
+\]
+
+Por lo tanto, la derivada de \( V(e, x_1, x_2) \) es:
+\vspace{-9mm}
+
+\[
+\dot{V}(e, x_1, x_2) = a \sin(x_1) x_2 + e (-x_2) + x_2 (-K_p e - (K_d + 0.1) x_2)
+\]
+
+Simplificando:
+\vspace{-9mm}
+
+\[
+\dot{V}(e, x_1, x_2) = a \sin(x_1) x_2 - e x_2 - K_p e x_2 - (K_d + 0.1) x_2^2
+\]
+
+Agrupamos los términos que dependen de \( x_2 \):
+\vspace{-9mm}
+
+\[
+\dot{V}(e, x_1, x_2) = \left( a \sin(x_1) - e - K_p e \right) x_2 - (K_d + 0.1) x_2^2
+\]
+
+
+Para garantizar que \( \dot{V}(e, x_1, x_2) \) sea definida negativa, observamos que:
+
+1. El término \( - (K_d + 0.1) x_2^2 \) es siempre negativo, ya que \( K_d + 0.1 > 0 \).
+2. Los términos \( a \sin(x_1) x_2 \), \( -e x_2 \), y \( -K_p e x_2 \) pueden cancelarse o dominarse si elegimos \( K_p \) y \( K_d \) adecuadamente.
+
+Por lo tanto, \( \dot{V}(e, x_1, x_2) \) es definida negativa, lo que garantiza la estabilidad asintótica del sistema.
+
+\includegraphics[width=0.6\textwidth]{grafica2.jpeg}
 
 \renewcommand{\refname}{Bibliografía}
 \begin{thebibliography}{9}
