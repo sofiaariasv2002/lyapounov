@@ -117,20 +117,118 @@ El control PID opera dentro de un sistema de ciclo cerrado, un mecanismo que uti
 
 El sistema que estamos analizando es un péndulo simple considerando la fricción cuya dinámica está dada por la siguiente ecuación:
 
-\vspace{-4mm}
+\vspace{-7mm}
 
 \begin{flalign*}
     & \hspace{5cm} mL^2 \ddot{q} + b \dot{q} + mgL \sin q = \tau,
 \end{flalign*}
 
-con las variables de estado:
-\begin{equation}
-    x_1 = q, \quad x_2 = \dot{q}.
-\end{equation}
-Sustituyendo:
-\begin{equation}
-    \dot{x}_2 = -9.81 \sin(x_1) - 0.1 x_2 + \tau.
-\end{equation}
+\begin{tabbing}
+    $\theta$ \hspace{1cm} \= ángulo del péndulo \\ 
+    $m$ \> Masa del péndulo \\ 
+    $L$ \> longitud del péndulo \\ 
+    $b$ \> coeficiente de fricción \\ 
+    $g$ \> aceleración debido a la gravedad \\ 
+    $\tau$ \> torque de entrada aplicada al péndulo 
+\end{tabbing}
+Por simplificación vamos a igualar m=1, L=1, b=0.1 y 9.8=9.81.
+
+Definimos las variables de estado:
+\vspace{-3mm}
+\[
+x_1 = q
+\]
+\vspace{-3mm}
+\[
+x_2 = \dot{q}
+\]
+\vspace{-3mm}
+\[
+\dot{x}_1 = x_2
+\]
+\vspace{-3mm}
+\[
+e = \Theta_d - x_1
+\]
+\vspace{-3mm}
+\[
+\dot{e} = -x_2
+\]
+
+La dinámica del sistema se puede reescribir en forma de espacio de estado:
+
+\vspace{-7mm}
+
+\begin{flalign*}
+    & \hspace{5cm} \dot{x}_2 = -9.81 \sin(x_1) - 0.1 x_2 + \tau
+\end{flalign*}
+
+Proponemos un controlador:
+
+\vspace{-7mm}
+
+\begin{flalign*}
+    & \hspace{5cm} \tau = -kp x_1 - kd x_2 + G(x_1)
+\end{flalign*}
+
+\hspace{1.25cm} $kp$ y $kd$ son las ganancias del controlador.
+
+\hspace{1.25cm} $G(x_1)$ es un término de compensación para eliminar la gravedad:
+
+\vspace{-7mm}
+
+\begin{flalign*}
+    & \hspace{5cm} G(x_1) = -9.81 \sin(x_1)
+\end{flalign*}
+
+Sustituyendo el controlador en la dinámica del sistema:
+
+\vspace{-7mm}
+
+\begin{flalign*}
+    & \hspace{2cm} \dot{x}_2 = -9.81 \sin(x_1) - 0.1 x_2 + \left( -kp x_1 - kd x_2 + 9.81 \sin(x_1) \right)
+\end{flalign*}
+
+Simplificando obtenemos:
+
+\vspace{-9mm}
+
+\begin{flalign*}
+    & \hspace{5cm} \dot{x}_2 = -kp x_1 - (kd + 0.1)x_2
+\end{flalign*}
+
+En forma matricial esto se puede escribir como:
+\[
+\begin{bmatrix} \dot{e} \\ \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = 
+\begin{bmatrix} 0 & 0 & -1 \\ 0 & 0 & 1 \\ -K_p & 0 & -(K_d + 0.1) \end{bmatrix}
+\begin{bmatrix} e \\ x_1 \\ x_2 \end{bmatrix}
+\]
+
+\uline{Función de lyapunov propuesta}
+
+\vspace{-9mm}
+
+\begin{flalign*}
+    & \hspace{5cm} V(x) = a \left( 1 - \cos x_1 \right) + \frac{1}{2} x_2^2
+\end{flalign*}
+
+Análisis de \( V(x) \):
+
+\( (1 - \cos x_1) \) es siempre no negativa y es 0 solo cuando \( x_1 = 2\pi n \), donde \( n \) es un entero.
+
+\( \frac{1}{2}x_2^2 \) es siempre positiva gracias al exponente cuadrado y es 0 solo cuando \( x_2 = 0 \).
+
+\textbf{por lo tanto \( V(x) \) es definida positiva}
+
+Análisis de \( V(x) \):
+
+La derivada de la función \( \dot{V}(x) = a(1 - \cos(x_1)) + \frac{1}{2}x_2^2 \) es:
+
+\vspace{-9mm}
+
+\begin{flalign*}
+    & \hspace{2cm} \dot{V}(x) = a x_2 \sin(x_1) - a x_2 \sin(x_1) - b x_2^2
+\end{flalign*}
 
 \textbf{Bibliografía}
 \begin{thebibliography}{9}
